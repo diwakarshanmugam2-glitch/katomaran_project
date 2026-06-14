@@ -16,7 +16,10 @@ connectDB();
 
 // Middlewares
 app.use(cors({
-  origin: [process.env.FRONTEND_URL || 'http://localhost:5173', 'https://katomaran-project.vercel.app'],
+  origin: function (origin, callback) {
+    // Allow all origins dynamically
+    callback(null, true);
+  },
   credentials: true,
 }));
 app.use(express.json());
