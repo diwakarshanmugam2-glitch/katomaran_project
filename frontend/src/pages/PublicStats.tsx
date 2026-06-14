@@ -12,7 +12,7 @@ import {
   Pie,
   Cell
 } from 'recharts';
-import { api } from '../utils/api';
+import { api, BASE_URL } from '../utils/api';
 
 interface DistributionData {
   name: string;
@@ -105,7 +105,7 @@ export const PublicStats: React.FC = () => {
     );
   }
 
-  const shortUrl = `http://localhost:5000/${data.url.shortCode}`;
+  const shortUrl = `${BASE_URL}/${data.url.shortCode}`;
 
   return (
     <div className="min-h-screen bg-[#f8fafc] bg-grid-pattern relative flex flex-col">

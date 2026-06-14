@@ -6,7 +6,7 @@ import {
   AlertCircle, AlertTriangle, ChevronLeft, ChevronRight,
   ExternalLink, QrCode, Activity
 } from 'lucide-react';
-import { api } from '../utils/api';
+import { BASE_URL, api } from '../utils/api';
 
 interface UrlData {
   _id: string;
@@ -71,7 +71,7 @@ export const ManageLinks: React.FC = () => {
   };
 
   const copyLink = (code: string, id: string) => {
-    const shortUrl = `http://localhost:5000/${code}`;
+    const shortUrl = `${BASE_URL}/${code}`;
     navigator.clipboard.writeText(shortUrl);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
@@ -193,7 +193,7 @@ export const ManageLinks: React.FC = () => {
             <div className="space-y-3">
               {urls.map((url) => {
                 const shortDisplay = url.customAlias || url.shortCode;
-                const shortUrl = `http://localhost:5000/${shortDisplay}`;
+                const shortUrl = `${BASE_URL}/${shortDisplay}`;
 
                 return (
                   <div

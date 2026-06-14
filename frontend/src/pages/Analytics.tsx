@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, AlertCircle } from 'lucide-react';
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip } from 'recharts';
-import { api } from '../utils/api';
+import { api, BASE_URL } from '../utils/api';
 
 interface AnalyticsPayload {
   url: {
@@ -113,7 +113,7 @@ export const Analytics: React.FC = () => {
     );
   }
 
-  const shortUrl = `http://localhost:5000/${data.url.customAlias || data.url.shortCode}`;
+  const shortUrl = `${BASE_URL}/${data.url.customAlias || data.url.shortCode}`;
   
   // Create progress bar helper
   const renderProgressBars = (items: { name: string; value: number }[], total: number) => {

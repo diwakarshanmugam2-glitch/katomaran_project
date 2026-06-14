@@ -4,6 +4,7 @@ import { api } from '../utils/api';
 import { Link2, Sparkles, Globe, ChevronDown, ChevronUp, Copy, Check, ExternalLink, UploadCloud, Download, QrCode } from 'lucide-react';
 import { BulkUploadModal } from '../components/BulkUploadModal';
 import { QrCodeModal } from '../components/QrCodeModal';
+import { BASE_URL } from '../utils/api';
 import { motion } from 'framer-motion';
 
 interface UrlData {
@@ -88,7 +89,7 @@ export const Dashboard: React.FC = () => {
   };
 
   const copyLink = (code: string, id: string) => {
-    const shortUrl = `http://localhost:5000/${code}`;
+    const shortUrl = `${BASE_URL}/${code}`;
     navigator.clipboard.writeText(shortUrl);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
@@ -111,7 +112,7 @@ export const Dashboard: React.FC = () => {
     const csvContent = [
       headers.join(','),
       ...filteredAndSortedUrls.map(url => {
-        const shortUrl = `http://localhost:5000/${url.customAlias || url.shortCode}`;
+        const shortUrl = `${BASE_URL}/${url.customAlias || url.shortCode}`;
         const created = new Date(url.createdAt).toLocaleDateString();
         const expiry = url.expiryDate ? new Date(url.expiryDate).toLocaleDateString() : 'Never';
         const status = url.isActive ? 'Active' : 'Expired';
@@ -285,7 +286,7 @@ export const Dashboard: React.FC = () => {
                   ) : (
                     filteredAndSortedUrls.map(url => {
                       const shortDisplay = url.customAlias || url.shortCode;
-                      const shortLink = `http://localhost:5000/${shortDisplay}`;
+                      const shortLink = `${BASE_URL}/${shortDisplay}`;
                       
                       return (
                         <tr key={url._id} className="saas-row">
@@ -302,7 +303,7 @@ export const Dashboard: React.FC = () => {
                               <button onClick={() => copyLink(shortDisplay, url._id)} className="text-slate-400 hover:text-blue-500 transition-colors bg-slate-50 p-1.5 rounded-md" title="Copy">
                                 {copiedId === url._id ? <Check className="h-3 w-3 text-blue-500" /> : <Copy className="h-3 w-3" />}
                               </button>
-                              <button onClick={() => setActiveQrUrl(`http://localhost:5000/${url.shortCode}`)} className="text-slate-400 hover:text-emerald-500 transition-colors bg-slate-50 p-1.5 rounded-md ml-1" title="Generate QR Code">
+                              <button onClick={() => setActiveQrUrl(`${BASE_URL}/${url.shortCode}`)} className="text-slate-400 hover:text-emerald-500 transition-colors bg-slate-50 p-1.5 rounded-md ml-1" title="Generate QR Code">
                                 <QrCode className="h-3 w-3" />
                               </button>
                             </div>
