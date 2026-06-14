@@ -189,9 +189,8 @@ graph TD
 
 ---
 
-## 10. Loom/YouTube Demo Placeholder
-[![ChronoLink AI Demonstration Video](https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
-*(Replace link with your actual recorded hackathon presentation video URL)*
+## 10. Automated Browser Walkthrough Video
+![Project Demo Walkthrough](demo_video.webp)
 
 ---
 
