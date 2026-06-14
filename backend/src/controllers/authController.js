@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const nodemailer = require('nodemailer');
 
 // Helper to generate JWT
 const generateToken = (id) => {
@@ -160,12 +161,68 @@ const forgotPassword = async (req, res) => {
     user.resetPasswordExpiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
     await user.save();
 
-    // 🛑 IMPORTANT HACKATHON SIMULATION: Print to console
-    console.log('\n=============================================');
-    console.log('🚨 PASSWORD RESET CODE GENERATED 🚨');
-    console.log(`Email: ${user.email}`);
-    console.log(`Code:  ${code}`);
-    console.log('=============================================\n');
+    // Configure Nodemailer Transporter
+    let transporter;
+    let isTestAccount = false;
+    
+    if (process.env.EMAIL_USER === 'your_email@gmail.com' || !process.env.EMAIL_USER) {
+      // Create a test account automatically if no real email is provided
+      const testAccount = await nodemailer.createTestAccount();
+      transporter = nodemailer.createTransport({
+        host: "smtp.ethereal.email",
+        port: 587,
+        secure: false, 
+        auth: {
+          user: testAccount.user, 
+          pass: testAccount.pass, 
+        },
+      });
+      isTestAccount = true;
+      console.log('⚠️ No real email configured in .env. Using Ethereal Test Email.');
+    } else {
+      transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+      });
+    }
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: user.email,
+      subject: 'Your Password Reset Code',
+      text: `Hello,\n\nYou requested a password reset. Here is your 6-digit verification code:\n\n${code}\n\nThis code will expire in 10 minutes.\n\nIf you did not request this, please ignore this email.`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2>Password Reset Request</h2>
+          <p>Hello,</p>
+          <p>You requested a password reset. Here is your 6-digit verification code:</p>
+          <div style="background-color: #f4f4f4; padding: 15px; text-align: center; border-radius: 5px; margin: 20px 0;">
+            <h1 style="margin: 0; letter-spacing: 5px; color: #333;">${code}</h1>
+          </div>
+          <p>This code will expire in 10 minutes.</p>
+          <p style="color: #888; font-size: 12px; margin-top: 30px;">If you did not request this, please ignore this email.</p>
+        </div>
+      `
+    };
+
+    try {
+      const info = await transporter.sendMail(mailOptions);
+      console.log(\`Reset email sent to \${user.email}\`);
+      
+      if (isTestAccount) {
+        console.log('=============================================');
+        console.log('📨 TEST EMAIL SENT! View it here:');
+        console.log(nodemailer.getTestMessageUrl(info));
+        console.log('=============================================');
+      }
+      
+    } catch (emailError) {
+      console.error('Error sending email:', emailError);
+      return res.status(500).json({ message: 'Error sending email. Please check server email configuration.' });
+    }
 
     return res.status(200).json({ message: 'If the email exists, a reset code was sent.' });
   } catch (error) {
