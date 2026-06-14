@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../utils/api';
-import { Link2, User, Mail, Lock, AlertCircle, ArrowRight, Infinity as InfinityIcon } from 'lucide-react';
+import { User, Mail, Lock, AlertCircle, ArrowRight, Infinity as InfinityIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export const Register: React.FC = () => {

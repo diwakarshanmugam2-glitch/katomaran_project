@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../utils/api';
-import { User, Mail, Shield, Calendar, KeyRound, Lock, Check, Zap, ArrowRight, ShieldCheck, Activity } from 'lucide-react';
+import { User, Mail, Calendar, KeyRound, Lock, Check, Zap, ArrowRight, ShieldCheck, Activity } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export const Settings: React.FC = () => {

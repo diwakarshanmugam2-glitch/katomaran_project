@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../utils/api';
-import { Link2, Mail, Lock, AlertCircle, ArrowRight, Sparkles, Infinity as InfinityIcon } from 'lucide-react';
+import { Mail, Lock, AlertCircle, ArrowRight, Infinity as InfinityIcon } from 'lucide-react';
 
 export const Login: React.FC = () => {
   const { login, isAuthenticated } = useAuth();

@@ -2,9 +2,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Link2, Search, Trash2, BarChart3, Copy, Check,
+  Search, Trash2, BarChart3, Copy, Check,
   AlertCircle, AlertTriangle, ChevronLeft, ChevronRight,
-  ExternalLink, QrCode, Pencil, Activity
+  ExternalLink, QrCode, Activity
 } from 'lucide-react';
 import { api } from '../utils/api';
 
@@ -32,7 +32,6 @@ export const ManageLinks: React.FC = () => {
   const [order, setOrder] = useState('desc');
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [totalItems, setTotalItems] = useState(0);
   const limit = 8;
 
   const [copiedId, setCopiedId] = useState<string | null>(null);
@@ -46,7 +45,6 @@ export const ManageLinks: React.FC = () => {
       );
       setUrls(data.urls);
       setTotalPages(data.pagination.totalPages);
-      setTotalItems(data.pagination.totalItems);
     } catch (err: any) {
       console.error(err);
       setErrorMsg('Failed to load shortened URLs.');

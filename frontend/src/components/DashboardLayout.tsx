@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LayoutDashboard, BarChart3, Settings as SettingsIcon, LogOut, Link2, Bell, Hexagon } from 'lucide-react';
+import { LayoutDashboard, BarChart3, Settings as SettingsIcon, LogOut, Bell, Hexagon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const DashboardLayout: React.FC = () => {

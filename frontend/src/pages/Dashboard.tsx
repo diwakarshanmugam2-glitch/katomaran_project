@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../utils/api';
-import { Link2, Sparkles, Globe, MousePointerClick, Activity, ChevronDown, ChevronUp, Copy, Check, ExternalLink, UploadCloud, Download, Settings as SettingsIcon, QrCode } from 'lucide-react';
+import { Link2, Sparkles, Globe, ChevronDown, ChevronUp, Copy, Check, ExternalLink, UploadCloud, Download, QrCode } from 'lucide-react';
 import { BulkUploadModal } from '../components/BulkUploadModal';
 import { QrCodeModal } from '../components/QrCodeModal';
 import { motion } from 'framer-motion';
