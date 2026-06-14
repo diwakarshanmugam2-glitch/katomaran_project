@@ -1,5 +1,7 @@
 # ChronoLink AI – Premium URL Shortener & Analytics Platform
 
+**🚀 Live Demo:** [https://katomaran-project.vercel.app](https://katomaran-project.vercel.app)
+
 ChronoLink AI is an enterprise-grade URL shortener and real-time analytics engine featuring a gorgeous dark-themed glassmorphism interface with neon glow accents, micro-animations, interactive dashboard reports, and CSV bulk import capabilities.
 
 ---
@@ -182,10 +184,10 @@ graph TD
 ## 9. Screenshots Section
 
 ### Landing Page & Interactive Shortener Widget
-![Landing Page Screenshot](file:///C:/Users/diwak/.gemini/antigravity-ide/brain/13924ddf-86d3-4623-9e6d-2f4febe42e75/landing_page_1781254092419.png)
+![Landing Page Screenshot](screenshots/landing_page.png)
 
 ### Secure Account Registration Portal
-![Registration Portal Screenshot](file:///C:/Users/diwak/.gemini/antigravity-ide/brain/13924ddf-86d3-4623-9e6d-2f4febe42e75/registration_form_filled_1781253702859.png)
+![Registration Portal Screenshot](screenshots/registration_form.png)
 
 ---
 
