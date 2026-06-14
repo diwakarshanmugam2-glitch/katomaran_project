@@ -210,7 +210,7 @@ const forgotPassword = async (req, res) => {
 
     try {
       const info = await transporter.sendMail(mailOptions);
-      console.log(\`Reset email sent to \${user.email}\`);
+      console.log(`Reset email sent to ${user.email}`);
       
       if (isTestAccount) {
         console.log('=============================================');
