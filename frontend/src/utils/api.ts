@@ -1,5 +1,10 @@
 export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-export const BASE_URL = API_BASE_URL.replace('/api', '');
+// Safely remove /api from the end of the URL for the frontend BASE_URL
+let _baseUrl = API_BASE_URL.replace(/\/+$/, ''); // Remove trailing slashes
+if (_baseUrl.endsWith('/api')) {
+  _baseUrl = _baseUrl.slice(0, -4);
+}
+export const BASE_URL = _baseUrl;
 
 // Helper to get auth headers
 const getHeaders = (isMultipart = false) => {

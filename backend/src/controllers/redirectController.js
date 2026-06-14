@@ -49,13 +49,15 @@ const handleRedirect = async (req, res) => {
 
     if (!url) {
       // If not found, redirect to frontend homepage or 404 page
-      const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+      let frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+      frontendUrl = frontendUrl.replace(/\/+$/, ''); // Remove trailing slashes
       return res.redirect(`${frontendUrl}/not-found?code=${shortCode}`);
     }
 
     // Check expiration date
     if (url.expiryDate && new Date(url.expiryDate) < new Date()) {
-      const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+      let frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+      frontendUrl = frontendUrl.replace(/\/+$/, ''); // Remove trailing slashes
       return res.redirect(`${frontendUrl}/expired`);
     }
 
